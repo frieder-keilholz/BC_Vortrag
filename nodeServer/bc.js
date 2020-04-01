@@ -34,6 +34,7 @@ class BlockChain{
     }
 }
 
+
 let bc = new BlockChain();
 
 bc.addBlock(new Block(1, "10/20/4444", "test1"));
