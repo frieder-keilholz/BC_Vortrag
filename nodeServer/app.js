@@ -6,7 +6,7 @@ app.listen(3000, () => {
 })
 
 app.get("/", (req, res) => {
-    res.json("Website");
+    res.sendFile(__dirname + '/../../frontend/index.html');
 });
 
 app.get("/getBC", (req, res) => {
