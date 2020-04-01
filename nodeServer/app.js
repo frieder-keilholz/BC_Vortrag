@@ -1,5 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+
+let bc = require('./bc');
 var app = express();
 app.use(bodyParser.json());
 
@@ -20,7 +22,7 @@ app.get("/style.css", (req, res) => {
 });
 
 app.get("/getBC", (req, res) => {
-   res.json("BC"); 
+   res.json(bc(2)); 
 });
 
 app.get("/getWork", (req, res) => {
