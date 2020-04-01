@@ -1,0 +1,12 @@
+.scrollClass {
+    
+}
+
+.chainview{
+    max-height: 50%;
+    overflow-y: scroll;
+}
+
+body{
+    min-height: 100%;
+}
