@@ -350,7 +350,7 @@ MigrationBackup/
 .ionide/
 
 
-### VS Code
+#### VS Code
 .vscode/
 launch.json
 settings.json
