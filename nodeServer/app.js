@@ -11,6 +11,14 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + '/frontend/index.html');
 });
 
+app.get("/script.js", (req, res) => {
+    res.sendFile(__dirname + '/frontend/script.js');
+});
+
+app.get("/style.css", (req, res) => {
+    res.sendFile(__dirname + '/frontend/style.css');
+});
+
 app.get("/getBC", (req, res) => {
    res.json("BC"); 
 });

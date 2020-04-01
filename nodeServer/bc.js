@@ -16,7 +16,7 @@ class Block{
 
 class BlockChain{
     constructor(){
-        this.chain = [];
+        this.chain = [this.createGenisisBlock()];
     }
 
     createGenisisBlock(){
@@ -29,6 +29,14 @@ class BlockChain{
 
     addBlock(newBlock){
         newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock
+        newBlock.hash = newBlock.calculateHash();
+        this.chain.push(newBlock);
     }
 }
+
+let bc = new BlockChain();
+
+bc.addBlock(new Block(1, "10/20/4444", "test1"));
+bc.addBlock(new Block(2, "12/45/7845", "test2"));
+
+console.log(JSON.stringify(bc, null, 4));
