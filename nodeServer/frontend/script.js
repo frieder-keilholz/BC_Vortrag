@@ -13,3 +13,6 @@ function loadBlockchain(){
     }
     request.send();
 }
+function fillBlockchain(jsonResponse){
+
+}
