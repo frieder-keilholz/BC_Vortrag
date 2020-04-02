@@ -22,8 +22,8 @@ class BlockChain{
     constructor(){
         this.nextIndex = 1;
         this.chain = [this.createGenisisBlock()];
-        //this.messages = [{message:"Ursprung", absender: "Genesis"}];
-        this.message = new Array();
+        this.messages = [{message:"Ursprung", absender: "Genesis"}];
+        //this.message = new Array();
     }
 
     createGenisisBlock(){
@@ -63,7 +63,7 @@ class BlockChain{
         this.messages.push(msg);
     }
     getNextMessage(){
-        if(!this.messages || this.messages.length == 0){
+        if(this.messages.length == 0){
             return false;
         }
         return this.messages.shift();
