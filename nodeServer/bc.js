@@ -7,6 +7,7 @@ class Block{
         this.previousHash = previousHash;
         this.absender = absender;
         this.nonce = nounce;
+        this.hash = '';
 
         //this.hash = this.calculateHash();
     }
@@ -102,6 +103,7 @@ module.exports = {
         let recvBlock = new Block(block.index,block.timestamp,block.message,block.absender,block.previousHash,block.nounce);
         if(recvBlock.calculateHash == block.hash){
             console.log("Hash legitness");
+            recvBlock.hash = block.hash;
             bc.addBlock(recvBlock);
         }else{
             console.log("Hash not legitness");

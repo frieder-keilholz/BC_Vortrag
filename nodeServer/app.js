@@ -22,6 +22,7 @@ app.get("/style.css", (req, res) => {
 });
 
 app.get("/getBC", (req, res) => {
+    console.log("Serve BC");
    res.json(blockchain.getBlockchainJSON());
    console.log(blockchain.getBlockchainJSON());
 });
