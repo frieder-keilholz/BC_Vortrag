@@ -19,7 +19,7 @@ class Block{
 class BlockChain{
     constructor(){
         this.chain = [this.createGenisisBlock()];
-        this.messages = [];
+        this.messages = [{message:"Ursprung", absender: "Genesis"}];
         this.nextMessage;
     }
 
@@ -60,7 +60,11 @@ class BlockChain{
         this.messages.push(msg);
     }
     getNextMessage(){
+        if(this.nextMessage == undefined){
+            return false;
+        }
         let returnMsg = this.nextMessage;
+        this.nextMessage = this.messages.find(true);
         return returnMsg;
     }
 }
@@ -85,7 +89,12 @@ module.exports = {
         bc.addMessage(msg);
     },
     getTask: function () {
-        
+        msg = bc.getNextMessage();
+        if(!msg){
+            return false;
+        }else{
+            
+        }
     }
 };
 //console.log(JSON.stringify(bc, null, 4));
