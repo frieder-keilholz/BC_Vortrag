@@ -71,6 +71,7 @@ class BlockChain{
 
 var bc = new BlockChain();
 
+/*
 bc.addBlock(new Block(1, "10/20/2019", "test1"));
 bc.addBlock(new Block(2, "12/45/2019", "test2"));
 bc.addBlock(new Block(3, "1/1/2020", "test3"));
@@ -78,6 +79,7 @@ bc.addBlock(new Block(4, "2/2/2020", "test4"));
 bc.addBlock(new Block(5, "2/12/2020", "test5"));
 bc.addBlock(new Block(6, "2/20/2020", "test6"));
 bc.addBlock(new Block(7, "3/3/2020", "test7"));
+*/
 
 module.exports = {
     getBlockchainJSON: function () {
