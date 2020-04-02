@@ -27,7 +27,7 @@ app.get("/getBC", (req, res) => {
 });
 
 app.get("/getWork", (req, res) => {
-    res.json("Work");
+    res.json(blockchain.getTask());
 });
 
 app.post("/solution", (req, res) => {

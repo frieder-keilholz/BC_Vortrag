@@ -70,7 +70,7 @@ function getWork(){
         if(request.status >= 200 && request.status < 300){
             console.log("Get Work succesfully");
             console.log(request.responseText);
-            proofOfWork(request.responseText);
+            proofOfWork(JSON.parse(request.responseText));
         } else {
             console.warn("Request failed!")
         }
@@ -79,6 +79,9 @@ function getWork(){
 }
 
 function proofOfWork(jsonResponse){
+    console.log(jsonResponse);
+    console.log(typeof(jsonResponse));
+    
     //blockchain = JSON.parse('{  "chain":[{"index":1,"hash":"00234F34B34C34","message":"Hallo Welt","absender":"Max Mustermann"},            {                "index":2,                "hash":"002E49F87AA343",                "message":"Hallo Welt",                "absender":"Max Mustermann"            }        ]    }');
     let block = jsonResponse.block; //Nicht sicher ob das so geht, Fireder schau mal drüber
     let difficulty = jsonResponse.difficulty;
@@ -92,12 +95,11 @@ function proofOfWork(jsonResponse){
 
     let request = new XMLHttpRequest();
     request.open("POST", "/solution");
-    
 
 }
 
 function calculateHash(block){
-    return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).ToString();
+    return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).toString();
 }
 
 function sendMessage(msg, from){

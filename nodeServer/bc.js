@@ -1,26 +1,27 @@
 const SHA256 = require("crypto-js").SHA256;
 class Block{
-    constructor(index, timestamp, message, previousHash = ''){
+    constructor(index, timestamp = Date.now(), message, absender, previousHash = '', nounce = 0){
         this.index = index;
         this.timestamp = timestamp;
         this.message = message;
         this.previousHash = previousHash;
-        this.hash = this.calculateHash();
-        this.absender = "Max Mustersender";
-        this.nonce = 0;
+        this.absender = absender;
+        this.nonce = nounce;
+
+        //this.hash = this.calculateHash();
     }
 
     calculateHash(){
-        return SHA256(this.index + this.previousHash + this.timestamp + this.message).toString();
+        this.hash = SHA256(this.index + this.previousHash + this.timestamp + this.message + this.absender + this.message + this.nonce).toString();
         //return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
     }
 }
 
 class BlockChain{
     constructor(){
+        this.nextIndex = 1;
         this.chain = [this.createGenisisBlock()];
         this.messages = [{message:"Ursprung", absender: "Genesis"}];
-        this.nextMessage;
     }
 
     createGenisisBlock(){
@@ -60,12 +61,10 @@ class BlockChain{
         this.messages.push(msg);
     }
     getNextMessage(){
-        if(this.nextMessage == undefined){
+        if(this.messages.length == 0){
             return false;
         }
-        let returnMsg = this.nextMessage;
-        this.nextMessage = this.messages.find(true);
-        return returnMsg;
+        return this.messages.shift;
     }
 }
 
@@ -87,13 +86,15 @@ module.exports = {
     addMessageTask: function (msg) {
         console.log(typeof(msg));
         bc.addMessage(msg);
+        console.log(bc.messages);
     },
     getTask: function () {
         msg = bc.getNextMessage();
+        console.log(bc.messages);
         if(!msg){
             return false;
         }else{
-            
+            return {block: new Block(bc.nextIndex, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 3};
         }
     }
 };
