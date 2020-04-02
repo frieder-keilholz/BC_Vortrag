@@ -70,6 +70,10 @@ function getWork(){
         if(request.status >= 200 && request.status < 300){
             console.log("Get Work succesfully");
             console.log(request.responseText);
+            if(request.responseText == "false"){
+                console.log("No Tasks 4 me")
+                return false;
+            }
             proofOfWork(JSON.parse(request.responseText));
         } else {
             console.warn("Request failed!")
@@ -90,16 +94,27 @@ function proofOfWork(jsonResponse){
         block.nonce++;
         hash = calculateHash(block);
     }
+    block.hash = hash;
+    console.log("Block mined: ");
+    console.log(block);    
 
-    console.log("Block mined: " + hash);
-
-    let request = new XMLHttpRequest();
-    request.open("POST", "/solution");
-
+    sendSolution(block);
 }
 
 function calculateHash(block){
     return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).toString();
+}
+
+function sendSolution(block){
+    var request = new XMLHttpRequest();
+    request.open("POST","/message");
+    request.setRequestHeader("Content-Type","application/json");
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        }
+    };
+    request.send(JSON.stringify(block));
 }
 
 function sendMessage(msg, from){

@@ -64,7 +64,7 @@ class BlockChain{
         if(this.messages.length == 0){
             return false;
         }
-        return this.messages.shift;
+        return this.messages.shift();
     }
 }
 
@@ -94,6 +94,7 @@ module.exports = {
         if(!msg){
             return false;
         }else{
+            console.log(msg);
             return {block: new Block(bc.nextIndex, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 3};
         }
     }
