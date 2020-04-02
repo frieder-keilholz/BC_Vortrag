@@ -60,9 +60,11 @@ function createBlock(block){
     let blockFromP = document.createElement("p");
     blockFromP.innerHTML = "Absender: " + block.absender;
     innerContainer.appendChild(blockIndexP);
-    innerContainer.appendChild(blockHashP);
+    innerContainer.appendChild(blockPrevHash);
+    
     innerContainer.appendChild(blockMessageP);
     innerContainer.appendChild(blockFromP);
+    innerContainer.appendChild(blockHashP);
     blockDiv.appendChild(innerContainer);
     bcview.appendChild(blockDiv);
 }
