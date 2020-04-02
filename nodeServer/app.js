@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
 app.use(bodyParser.json());
+const blockchain = require('./bc');
 
 app.listen(3000, () => {
     console.log("Server running on port 3000");
@@ -20,7 +21,9 @@ app.get("/style.css", (req, res) => {
 });
 
 app.get("/getBC", (req, res) => {
-   res.json("BC"); 
+   //res.json("BC"); 
+   res.json(blockchain.getBlockchainJSON());
+   console.log(blockchain.getBlockchainJSON());
 });
 
 app.get("/getWork", (req, res) => {
@@ -28,6 +31,11 @@ app.get("/getWork", (req, res) => {
 });
 
 app.post("/solution", (req, res) => {
+    console.log(req.body);
+    res.json(req.body);
+});
+
+app.post("/message", (req, res) => {
     console.log(req.body);
     res.json(req.body);
 });

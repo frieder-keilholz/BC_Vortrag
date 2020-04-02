@@ -1,16 +1,18 @@
 
-const SHA256 = require(crypto-js/SHA256);
+const SHA256 = require("crypto-js").SHA256;
 class Block{
     constructor(index, timestamp, message, previousHash = ''){
         this.index = index;
         this.timestamp = timestamp;
-        this.data = data;
+        this.message = message;
         this.previousHash = previousHash;
-        this.hash = this.calculateHash;
+        this.hash = this.calculateHash();
+        this.absender = "Max Mustersender";
     }
 
     calculateHash(){
-        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
+        return SHA256(this.index + this.previousHash + this.timestamp + this.message).toString();
+        //return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
     }
 }
 
@@ -37,7 +39,18 @@ class BlockChain{
 
 let bc = new BlockChain();
 
-bc.addBlock(new Block(1, "10/20/4444", "test1"));
-bc.addBlock(new Block(2, "12/45/7845", "test2"));
+bc.addBlock(new Block(1, "10/20/2019", "test1"));
+bc.addBlock(new Block(2, "12/45/2019", "test2"));
+bc.addBlock(new Block(3, "1/1/2020", "test3"));
+bc.addBlock(new Block(4, "2/2/2020", "test4"));
+bc.addBlock(new Block(5, "2/12/2020", "test5"));
+bc.addBlock(new Block(6, "2/20/2020", "test6"));
+bc.addBlock(new Block(7, "3/3/2020", "test7"));
 
-console.log(JSON.stringify(bc, null, 4));
+module.exports = {
+    getBlockchainJSON: function () {
+        return bc;
+        //return JSON.stringify(bc, null, 4);
+    }
+};
+//console.log(JSON.stringify(bc, null, 4));

@@ -2,6 +2,16 @@
     
 }
 
+
+.block{
+    text-align: center;
+}
+
+.block_background{
+    background-color: lightgreen;
+    border-radius: 1rem;
+}
+
 .chainview{
     max-height: 50%;
     overflow-y: scroll;
