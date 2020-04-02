@@ -8,6 +8,7 @@ class Block{
         this.previousHash = previousHash;
         this.hash = this.calculateHash();
         this.absender = "Max Mustersender";
+        this.nonce = 0;
     }
 
     calculateHash(){

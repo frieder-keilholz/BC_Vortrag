@@ -1,7 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
-let bc = require('./bc');
 var app = express();
 app.use(bodyParser.json());
 const blockchain = require('./bc');
@@ -23,7 +22,6 @@ app.get("/style.css", (req, res) => {
 });
 
 app.get("/getBC", (req, res) => {
-   //res.json("BC"); 
    res.json(blockchain.getBlockchainJSON());
    console.log(blockchain.getBlockchainJSON());
 });

@@ -11,7 +11,7 @@ function loadBlockchain(){
             console.log(request.responseText);
             fillBlockchain(request.responseText);
         }else{
-            console.warn("Request failed!")
+            console.warn("Request failed!");
         }
     }
     request.send();
@@ -61,4 +61,41 @@ function createBlock(block){
     innerContainer.appendChild(blockFromP);
     blockDiv.appendChild(innerContainer);
     bcview.appendChild(blockDiv);
+}
+
+function getWork(){
+    let request = new XMLHttpRequest();
+    request.open("GET", "/getWork");
+    request.onload = () => {
+        if(request.status >= 200 && request.status < 300){
+            console.log("Get Work succesfully");
+            console.log(request.responseText);
+            proofOfWork(request.responseText);
+        } else {
+            console.warn("Request failed!")
+        }
+    }
+    request.send();
+}
+
+function proofOfWork(jsonResponse){
+    //blockchain = JSON.parse('{  "chain":[{"index":1,"hash":"00234F34B34C34","message":"Hallo Welt","absender":"Max Mustermann"},            {                "index":2,                "hash":"002E49F87AA343",                "message":"Hallo Welt",                "absender":"Max Mustermann"            }        ]    }');
+    let block = jsonResponse.block; //Nicht sicher ob das so geht, Fireder schau mal drüber
+    let difficulty = jsonResponse.difficulty;
+    let hash = calculateHash(block);
+    while(hash.substring(0, difficulty) !== Array(difficulty +1).join("0")){
+        block.nonce++;
+        hash = calculateHash(block);
+    }
+
+    console.log("Block mined: " + hash);
+
+    let request = new XMLHttpRequest();
+    request.open("POST", "/solution");
+    
+
+}
+
+function calculateHash(block){
+    return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).ToString();
 }
