@@ -102,6 +102,7 @@ module.exports = {
         }
     },
     submitSolution: function (block) {
+        console.log("Solution submitted");
         let recvBlock = new Block(block.index,block.timestamp,block.message,block.absender,block.previousHash,block.nounce);
         if(recvBlock.calculateHash == block.hash){
             console.log("Hash legitness");
