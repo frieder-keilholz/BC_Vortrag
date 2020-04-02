@@ -63,7 +63,7 @@ class BlockChain{
         this.messages.push(msg);
     }
     getNextMessage(){
-        if(this.messages.length == 0){
+        if(!this.messages || this.messages.length == 0){
             return false;
         }
         return this.messages.shift();
