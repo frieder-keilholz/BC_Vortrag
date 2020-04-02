@@ -43,7 +43,7 @@ function createBlock(block){
     let blockDiv = document.createElement("div");
     blockDiv.classList.add("col-3");
     blockDiv.classList.add("block");
-    blockDiv.classList.add("p-2")
+    blockDiv.classList.add("p-3")
     let innerContainer = document.createElement("div");
     innerContainer.classList.add("block_background");
     let blockIndexP = document.createElement("p");
@@ -98,4 +98,17 @@ function proofOfWork(jsonResponse){
 
 function calculateHash(block){
     return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).ToString();
+}
+
+function sendMessage(msg){
+    var request = new XMLHttpRequest();
+    request.open("POST","/message");
+    request.setRequestHeader("Content-Type","application/json");
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        }
+    };
+    let transmitMsg = {"message":msg};
+    request.send(JSON.stringify(transmitMsg));
 }
