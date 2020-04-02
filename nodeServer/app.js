@@ -38,4 +38,5 @@ app.post("/solution", (req, res) => {
 app.post("/message", (req, res) => {
     console.log(req.body);
     res.json(req.body);
+    blockchain.addMessageTask(req.body);
 });

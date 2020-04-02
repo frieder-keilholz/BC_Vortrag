@@ -1,4 +1,3 @@
-
 const SHA256 = require("crypto-js").SHA256;
 class Block{
     constructor(index, timestamp, message, previousHash = ''){
@@ -20,6 +19,8 @@ class Block{
 class BlockChain{
     constructor(){
         this.chain = [this.createGenisisBlock()];
+        this.messages = [];
+        this.nextMessage;
     }
 
     createGenisisBlock(){
@@ -52,8 +53,15 @@ class BlockChain{
                 blocks.add(block);
             }
         }
-
         return blocks;
+    }
+
+    addMessage(msg){
+        this.messages.push(msg);
+    }
+    getNextMessage(){
+        let returnMsg = this.nextMessage;
+        return returnMsg;
     }
 }
 
@@ -71,6 +79,13 @@ module.exports = {
     getBlockchainJSON: function () {
         return bc;
         //return JSON.stringify(bc, null, 4);
+    },
+    addMessageTask: function (msg) {
+        console.log(typeof(msg));
+        bc.addMessage(msg);
+    },
+    getTask: function () {
+        
     }
 };
 //console.log(JSON.stringify(bc, null, 4));

@@ -100,7 +100,7 @@ function calculateHash(block){
     return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).ToString();
 }
 
-function sendMessage(msg){
+function sendMessage(msg, from){
     var request = new XMLHttpRequest();
     request.open("POST","/message");
     request.setRequestHeader("Content-Type","application/json");
@@ -109,6 +109,6 @@ function sendMessage(msg){
           console.log(this.responseText);
         }
     };
-    let transmitMsg = {"message":msg};
+    let transmitMsg = {"message":msg, "absender":from};
     request.send(JSON.stringify(transmitMsg));
 }
