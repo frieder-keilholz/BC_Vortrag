@@ -12,7 +12,7 @@ class Block{
     }
 
     calculateHash(){
-        this.hash = SHA256(this.index + this.previousHash + this.timestamp + this.message + this.absender + this.message + this.nonce).toString();
+        return SHA256(this.index + this.previousHash + this.timestamp + this.message + this.absender + this.message + this.nonce).toString();
         //return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
     }
 }
@@ -33,8 +33,8 @@ class BlockChain{
     }
 
     addBlock(newBlock){
-        newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.hash = newBlock.calculateHash();
+        //newBlock.previousHash = this.getLatestBlock().hash;
+        //newBlock.hash = newBlock.calculateHash();
         this.chain.push(newBlock);
     }
 
@@ -96,6 +96,15 @@ module.exports = {
         }else{
             console.log(msg);
             return {block: new Block(bc.nextIndex, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 3};
+        }
+    },
+    submitSolution: function (block) {
+        let recvBlock = new Block(block.index,block.timestamp,block.message,block.absender,block.previousHash,block.nounce);
+        if(recvBlock.calculateHash == block.hash){
+            console.log("Hash legitness");
+            bc.addBlock(recvBlock);
+        }else{
+            console.log("Hash not legitness");
         }
     }
 };
