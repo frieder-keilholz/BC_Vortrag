@@ -1,7 +1,7 @@
 
 const SHA256 = require("crypto-js").SHA256;
 class Block{
-    constructor(index, message, sender, previousHash = ''){
+    constructor(index, timestamp, message, previousHash = ''){
         this.index = index;
         this.timestamp = timestamp;
         this.message = message;
@@ -56,7 +56,7 @@ class BlockChain{
     }
 }
 
-let bc = new Blockchain();
+var bc = new BlockChain();
 
 bc.addBlock(new Block(1, "10/20/2019", "test1"));
 bc.addBlock(new Block(2, "12/45/2019", "test2"));

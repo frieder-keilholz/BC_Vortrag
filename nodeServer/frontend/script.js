@@ -21,10 +21,20 @@ function fillBlockchain(jsonResponse){
     //blockchain = JSON.parse('{  "chain":[{"index":1,"hash":"00234F34B34C34","message":"Hallo Welt","absender":"Max Mustermann"},            {                "index":2,                "hash":"002E49F87AA343",                "message":"Hallo Welt",                "absender":"Max Mustermann"            }        ]    }');
     blockchain = JSON.parse(jsonResponse)["chain"];
     console.log(blockchain);
+    blockchain = limitBlocks(blockchain, 0);
     blockchain.forEach(element => {
         //console.log("Block: "+element.index+ " Hash: "+element.hash);
         createBlock(element);
     });
+}
+
+function limitBlocks(blocks, numOfBlocks){
+    if(numOfBlocks == 0) return blocks;
+    let returnBlocks = [];
+    for(let i = blocks.length - numOfBlocks; i < blocks.length;i++){
+        returnBlocks.push(blocks[i]);
+    }
+    return returnBlocks;
 }
 
 function createBlock(block){
