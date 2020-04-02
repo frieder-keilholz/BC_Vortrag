@@ -18,6 +18,7 @@ function loadBlockchain(){
 }
 function fillBlockchain(jsonResponse){
     console.log(jsonResponse);
+    console.log(JSON.parse(jsonResponse));
     document.getElementById("blockchainview").innerHTML = "";
     //blockchain = JSON.parse('{  "chain":[{"index":1,"hash":"00234F34B34C34","message":"Hallo Welt","absender":"Max Mustermann"},            {                "index":2,                "hash":"002E49F87AA343",                "message":"Hallo Welt",                "absender":"Max Mustermann"            }        ]    }');
     blockchain = JSON.parse(jsonResponse)["chain"];
@@ -108,7 +109,7 @@ function calculateHash(block){
 
 function sendSolution(block){
     var request = new XMLHttpRequest();
-    request.open("POST","/message");
+    request.open("POST","/solution");
     request.setRequestHeader("Content-Type","application/json");
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
