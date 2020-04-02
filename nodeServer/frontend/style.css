@@ -9,7 +9,8 @@
 
 .chainview{
     max-height: 50%;
-    overflow-y: scroll;
+    
+    overflow: hidden;
 }
 
 body{
