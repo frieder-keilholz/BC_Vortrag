@@ -98,7 +98,7 @@ module.exports = {
             return false;
         }else{
             console.log(msg);
-            return {block: new Block(bc.chain.length, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 3};
+            return {block: new Block(bc.chain.length, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 5};
         }
     },
     submitSolution: function (block) {
