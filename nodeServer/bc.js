@@ -1,19 +1,19 @@
 const SHA256 = require("crypto-js").SHA256;
 class Block{
-    constructor(index, timestamp = Date.now(), message, absender, previousHash = '', nounce = 0){
+    constructor(index, timestamp = Date.now(), message, absender, previousHash = '', nonce = 0){
         this.index = index;
         this.timestamp = timestamp;
         this.message = message;
         this.previousHash = previousHash;
         this.absender = absender;
-        this.nonce = nounce;
+        this.nonce = nonce;
         this.hash = '';
 
         //this.hash = this.calculateHash();
     }
 
     calculateHash(){
-        return SHA256(this.index + this.previousHash + this.timestamp + this.message + this.absender + this.message + this.nonce).toString();
+        return SHA256(this.index + this.previousHash + this.timestamp + this.message + this.absender + this.nonce).toString();
         //return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.data)).toString();
     }
 }
@@ -98,18 +98,20 @@ module.exports = {
             return false;
         }else{
             console.log(msg);
-            return {block: new Block(bc.nextIndex, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 3};
+            return {block: new Block(bc.chain.length, Date.now(), msg.message, msg.absender,bc.getLatestBlock().hash,0), difficulty: 3};
         }
     },
     submitSolution: function (block) {
         console.log("Solution submitted");
-        let recvBlock = new Block(block.index,block.timestamp,block.message,block.absender,block.previousHash,block.nounce);
-        if(recvBlock.calculateHash == block.hash){
+        let recvBlock = new Block(block.index,block.timestamp,block.message,block.absender,block.previousHash,block.nonce);
+        if(recvBlock.calculateHash() == block.hash){
             console.log("Hash legitness");
             recvBlock.hash = block.hash;
             bc.addBlock(recvBlock);
         }else{
             console.log("Hash not legitness");
+            console.log(block);
+            console.log(recvBlock);
         }
     }
 };

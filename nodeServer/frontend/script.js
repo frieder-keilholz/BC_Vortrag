@@ -104,7 +104,7 @@ function proofOfWork(jsonResponse){
 }
 
 function calculateHash(block){
-    return sha256(block.index + block.previousHash + block.timestamp + block.message + block.nonce).toString();
+    return sha256(block.index + block.previousHash + block.timestamp + block.message + block.absender + block.nonce).toString();
 }
 
 function sendSolution(block){
@@ -116,6 +116,7 @@ function sendSolution(block){
           console.log(this.responseText);
         }
     };
+    console.log(block);
     request.send(JSON.stringify(block));
 }
 

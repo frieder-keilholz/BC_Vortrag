@@ -32,9 +32,11 @@ app.get("/getWork", (req, res) => {
 });
 
 app.post("/solution", (req, res) => {
-    console.log(req.body);
-    res.json(req.body);
-    blockchain.submitSolution(JSON.parse(req.body));
+    let content = req.body;
+    //console.log(content);
+    //let contentJSON = JSON.parse(content);
+    blockchain.submitSolution(content);
+    res.json(content);
 });
 
 app.post("/message", (req, res) => {
