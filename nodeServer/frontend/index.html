@@ -30,7 +30,8 @@
             <div class="col-lg-6 pr-4">
                 <p class="h2">Nachricht schreiben</p>
                 <textarea class="form-control" id="messageInput" rows="3"></textarea>
-                <button type="button" class="btn btn-primary mt-2">Nachricht senden</button>
+                <input type="text" id="nameInput" />
+                <button type="button" class="btn btn-primary mt-2" onclick="sendMessage(document.getElementById('messageInput').value, document.getElementById('nameInput').value)">Nachricht senden</button>
             </div>
         </div>
     </body>
