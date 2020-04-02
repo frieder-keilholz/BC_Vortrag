@@ -26,13 +26,13 @@
         <div class="row pl-3">
             <div class="col-lg-6">
                 <p class="h2">Block Minen</p>
-                <button type="button" class="btn btn-primary mt-2" onclick='getWork();'>Start Mining</button>
+                <button type="button" class="btn btn-primary mt-2" onclick='getWork(); loadBlockchain();'>Start Mining</button>
             </div>
             <div class="col-lg-6 pr-4">
                 <p class="h2">Nachricht schreiben</p>
                 <textarea class="form-control" id="messageInput" rows="3"></textarea>
                 <input type="text" id="nameInput" />
-                <button type="button" class="btn btn-primary mt-2" onclick="sendMessage(document.getElementById('messageInput').value, document.getElementById('nameInput').value)">Nachricht senden</button>
+                <button type="button" class="btn btn-primary mt-2" onclick="sendMessage(document.getElementById('messageInput').value, document.getElementById('nameInput').value); loadBlockchain();">Nachricht senden</button>
             </div>
         </div>
     </body>
