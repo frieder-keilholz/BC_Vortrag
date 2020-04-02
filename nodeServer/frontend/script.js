@@ -92,6 +92,7 @@ function proofOfWork(jsonResponse){
     let block = jsonResponse.block; //Nicht sicher ob das so geht, Fireder schau mal drüber
     let difficulty = jsonResponse.difficulty;
     let hash = calculateHash(block);
+
     while(hash.substring(0, difficulty) !== Array(difficulty +1).join("0")){
         block.nonce++;
         hash = calculateHash(block);
