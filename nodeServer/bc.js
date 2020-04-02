@@ -1,7 +1,7 @@
 
 const SHA256 = require("crypto-js").SHA256;
 class Block{
-    constructor(index, timestamp, message, previousHash = ''){
+    constructor(index, message, sender, previousHash = ''){
         this.index = index;
         this.timestamp = timestamp;
         this.message = message;
@@ -34,10 +34,29 @@ class BlockChain{
         newBlock.hash = newBlock.calculateHash();
         this.chain.push(newBlock);
     }
+
+    getLatestBlocks(numberOfBlocks){
+        console.log("ok");
+        let bc = new BlockChain();
+
+        bc.addBlock(new Block(1, "10/20/4444", "test1"));
+        bc.addBlock(new Block(2, "12/45/7845", "test2"));
+
+        console.log(JSON.stringify(bc, null, 4));
+
+        let blocks = new Set();
+        for( i = 0; i < numberOfBlocks; i++){
+            let block = this.chain[this.chain.length - i - 1];
+            if(block){
+                blocks.add(block);
+            }
+        }
+
+        return blocks;
+    }
 }
 
-
-let bc = new BlockChain();
+let bc = new Blockchain();
 
 bc.addBlock(new Block(1, "10/20/2019", "test1"));
 bc.addBlock(new Block(2, "12/45/2019", "test2"));
@@ -54,3 +73,5 @@ module.exports = {
     }
 };
 //console.log(JSON.stringify(bc, null, 4));
+
+//module.exports(getLatestBlocks);

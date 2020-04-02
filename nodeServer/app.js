@@ -1,5 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+
+let bc = require('./bc');
 var app = express();
 app.use(bodyParser.json());
 const blockchain = require('./bc');
