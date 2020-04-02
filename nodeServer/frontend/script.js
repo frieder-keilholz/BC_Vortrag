@@ -50,6 +50,8 @@ function createBlock(block){
     innerContainer.classList.add("block_background");
     let blockIndexP = document.createElement("p");
     blockIndexP.innerHTML = "Block #"+block.index;
+    let blockPrevHash = document.createElement("p");
+    blockPrevHash.innerHTML = "Vorgänger Hash: "+[block.previousHash.slice(0, block.previousHash.length/2), " ", block.previousHash.slice(block.previousHash.length/2)].join('');
     let blockHashP = document.createElement("p");
     console.log(block.hash);
     blockHashP.innerHTML = "Hash: "+[block.hash.slice(0, block.hash.length/2), " ", block.hash.slice(block.hash.length/2)].join('');
